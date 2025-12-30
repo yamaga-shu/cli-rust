@@ -1,9 +1,24 @@
-use clap::Command;
+use clap::{Arg, Command};
 
 fn main() {
-    let _m = Command::new("cli-rust")
+    let m = Command::new("cli-rust > echo")
         .author("yamaga-shu, s.yamaga.0318@gmail.com")
         .version("0.0.1")
         .about("Rust echo")
+        .arg(
+            Arg::new("text")
+                .value_name("TEXT")
+                .help("Input text")
+                .num_args(1..)
+                .required(true),
+        )
+        .arg(
+            Arg::new("n")
+                .short('n')
+                .help("Do not print newline")
+                .required(false),
+        )
         .get_matches();
+
+    println!("{:#?}", m)
 }
