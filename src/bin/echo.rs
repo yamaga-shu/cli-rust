@@ -24,9 +24,5 @@ fn main() {
     let texts = m.get_many::<String>("text").unwrap().map(|s| s.as_str());
     let output = texts.collect::<Vec<_>>().join(" ");
 
-    if m.get_flag("n") {
-        print!("{}", output);
-    } else {
-        println!("{}", output);
-    }
+    print!("{}{}", output, if m.get_flag("n") { "" } else { "\n" })
 }
