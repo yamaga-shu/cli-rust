@@ -16,9 +16,17 @@ fn main() {
             Arg::new("n")
                 .short('n')
                 .help("Do not print newline")
+                .action(clap::ArgAction::SetTrue)
                 .required(false),
         )
         .get_matches();
 
-    println!("{:#?}", m)
+    let texts = m.get_many::<String>("text").unwrap().map(|s| s.as_str());
+    let output = texts.collect::<Vec<_>>().join(" ");
+
+    if m.get_flag("n") {
+        print!("{}", output);
+    } else {
+        println!("{}", output);
+    }
 }
