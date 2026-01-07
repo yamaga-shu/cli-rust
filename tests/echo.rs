@@ -39,5 +39,6 @@ fn echo_no_newline_multiple_args() {
         .arg("World")
         .assert()
         .success()
-        .stdout(predicate::str::contains("Hello World"));
+        .stdout(predicate::str::contains("Hello World"))
+        .stdout(predicate::str::ends_with("d"));
 }
