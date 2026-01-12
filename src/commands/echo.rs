@@ -33,3 +33,10 @@ pub fn print_echo(text_args: Vec<&str>, no_newline: bool) {
     let output = text_args.join(" ");
     print!("{}{}", output, if no_newline { "" } else { "\n" });
 }
+
+pub struct Handler;
+impl super::CommandHandler for Handler {
+    fn run(&self, matches: &ArgMatches) {
+        run(matches);
+    }
+}
