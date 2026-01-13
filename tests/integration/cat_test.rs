@@ -47,6 +47,30 @@ fn cat_multiple_files() {
 }
 
 #[test]
+fn cat_with_number() {
+    let cmd = cargo::cargo_bin!("cli-rust");
+    let mut cmd = std::process::Command::new(cmd);
+    cmd.arg("cat")
+        .arg("-n")
+        .arg(get_fixture("fox.txt"))
+        .assert()
+        .success()
+        .stdout(predicate::str::contains("1 ").and(predicate::str::contains("quick brown fox")));
+}
+
+#[test]
+fn cat_with_number_long_flag() {
+    let cmd = cargo::cargo_bin!("cli-rust");
+    let mut cmd = std::process::Command::new(cmd);
+    cmd.arg("cat")
+        .arg("--number")
+        .arg(get_fixture("fox.txt"))
+        .assert()
+        .success()
+        .stdout(predicate::str::contains("1 ").and(predicate::str::contains("quick brown fox")));
+}
+
+#[test]
 fn cat_no_args() {
     let cmd = cargo::cargo_bin!("cli-rust");
     let mut cmd = std::process::Command::new(cmd);
